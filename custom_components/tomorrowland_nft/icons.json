@@ -1,8 +1,15 @@
 {
   "entity": {
     "sensor": {
-      "floor_price_sol": { "default": "mdi:circle-multiple-outline" },
-      "floor_price_currency": { "default": "mdi:cash-multiple" }
+      "sol_price": {
+        "default": "mdi:chart-line"
+      },
+      "floor_price_sol": {
+        "default": "mdi:circle-multiple-outline"
+      },
+      "floor_price_currency": {
+        "default": "mdi:cash-multiple"
+      }
     }
   }
 }

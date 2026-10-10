@@ -49,20 +49,35 @@
   },
   "entity": {
     "sensor": {
+      "sol_price": {
+        "name": "Price {currency}"
+      },
       "floor_price_sol": {
         "name": "Floor price SOL",
         "state_attributes": {
-          "listed_count": { "name": "Listed" },
-          "avg_price_24h": { "name": "Average price (24h)" },
-          "volume_7d": { "name": "Volume (7d)" }
+          "listed_count": {
+            "name": "Listed"
+          },
+          "avg_price_24h": {
+            "name": "Average price (24h)"
+          },
+          "volume_7d": {
+            "name": "Volume (7d)"
+          }
         }
       },
       "floor_price_currency": {
         "name": "Floor price {currency}",
         "state_attributes": {
-          "sol_price": { "name": "SOL price" },
-          "avg_price_24h": { "name": "Average price (24h)" },
-          "volume_7d": { "name": "Volume (7d)" }
+          "sol_price": {
+            "name": "SOL price"
+          },
+          "avg_price_24h": {
+            "name": "Average price (24h)"
+          },
+          "volume_7d": {
+            "name": "Volume (7d)"
+          }
         }
       }
     }

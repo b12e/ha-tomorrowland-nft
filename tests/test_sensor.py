@@ -71,3 +71,12 @@ async def test_rate_limited_retries_setup(hass: HomeAssistant, aioclient_mock) -
     )
     entry = await _setup(hass)
     assert entry.state is ConfigEntryState.SETUP_RETRY
+
+
+async def test_sol_price(hass: HomeAssistant, mock_apis) -> None:
+    """The SOL rate gets its own sensor on a Solana device."""
+    await _setup(hass)
+    state = hass.states.get("sensor.solana_price_eur")
+    assert float(state.state) == 100.0
+    assert state.attributes["unit_of_measurement"] == "EUR"
+    assert state.attributes["friendly_name"] == "Solana Price EUR"

@@ -21,7 +21,13 @@ Each collection is a service device with two sensors:
 | `sensor.<collection>_floor_price_sol` | `47.399 SOL` | `listed_count`, `avg_price_24h`, `volume_7d` (SOL) |
 | `sensor.<collection>_floor_price_<currency>` | `4638.94 EUR` | `sol_price`, `avg_price_24h`, `volume_7d` (currency) |
 
-Both sensors use `state_class: measurement`, so they get long-term statistics.
+A separate **Solana** device holds the exchange rate itself:
+
+| Entity | Example |
+| --- | --- |
+| `sensor.solana_price_<currency>` | `97.87 EUR` |
+
+All sensors use `state_class: measurement`, so they get long-term statistics.
 A collection with nothing listed reports `unknown` rather than `0`.
 
 ## Installation

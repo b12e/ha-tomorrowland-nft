@@ -33,3 +33,4 @@ LAMPORTS_PER_SOL: Final = 1_000_000_000
 MAGIC_EDEN_URL: Final = "https://api-mainnet.magiceden.dev/v2"
 MAGIC_EDEN_MARKETPLACE_URL: Final = "https://magiceden.io/marketplace"
 COINGECKO_URL: Final = "https://api.coingecko.com/api/v3"
+COINGECKO_SOLANA_URL: Final = "https://www.coingecko.com/en/coins/solana"

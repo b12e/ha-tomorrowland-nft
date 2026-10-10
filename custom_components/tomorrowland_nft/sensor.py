@@ -1,4 +1,4 @@
-"""Floor price sensors for the Tomorrowland NFT collections."""
+"""Floor price sensors for the Tomorrowland NFT collections, plus the SOL price."""
 
 from __future__ import annotations
 
@@ -17,7 +17,7 @@ from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .api import CollectionStats
-from .const import COLLECTIONS, DOMAIN, MAGIC_EDEN_MARKETPLACE_URL
+from .const import COINGECKO_SOLANA_URL, COLLECTIONS, DOMAIN, MAGIC_EDEN_MARKETPLACE_URL
 from .coordinator import (
     TomorrowlandNftConfigEntry,
     TomorrowlandNftCoordinator,
@@ -78,13 +78,45 @@ async def async_setup_entry(
     entry: TomorrowlandNftConfigEntry,
     async_add_entities: AddConfigEntryEntitiesCallback,
 ) -> None:
-    """Create a SOL and a currency floor price sensor per collection."""
+    """Create a SOL and a currency floor price sensor per collection, and a SOL price sensor."""
     coordinator = entry.runtime_data
-    async_add_entities(
+    entities: list[SensorEntity] = [SolPriceSensor(coordinator)]
+    entities.extend(
         FloorPriceSensor(coordinator, symbol, description)
         for symbol in coordinator.symbols
         for description in SENSORS
     )
+    async_add_entities(entities)
+
+
+class SolPriceSensor(CoordinatorEntity[TomorrowlandNftCoordinator], SensorEntity):
+    """Price of 1 SOL in the configured currency."""
+
+    _attr_has_entity_name = True
+    _attr_translation_key = "sol_price"
+    _attr_state_class = SensorStateClass.MEASUREMENT
+    _attr_suggested_display_precision = 2
+
+    def __init__(self, coordinator: TomorrowlandNftCoordinator) -> None:
+        """Initialize the sensor on its own Solana device."""
+        super().__init__(coordinator)
+        currency = coordinator.currency.upper()
+        self._attr_unique_id = f"{coordinator.config_entry.entry_id}_sol_price"
+        self._attr_native_unit_of_measurement = currency
+        self._attr_translation_placeholders = {"currency": currency}
+        self._attr_device_info = DeviceInfo(
+            identifiers={(DOMAIN, "solana")},
+            name="Solana",
+            manufacturer="CoinGecko",
+            model="Cryptocurrency",
+            entry_type=DeviceEntryType.SERVICE,
+            configuration_url=COINGECKO_SOLANA_URL,
+        )
+
+    @property
+    def native_value(self) -> float:
+        """Return the SOL exchange rate."""
+        return self.coordinator.data.sol_price
 
 
 class FloorPriceSensor(CoordinatorEntity[TomorrowlandNftCoordinator], SensorEntity):
