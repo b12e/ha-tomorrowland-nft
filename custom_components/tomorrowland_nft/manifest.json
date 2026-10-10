@@ -1,0 +1,13 @@
+{
+  "domain": "tomorrowland_nft",
+  "name": "Tomorrowland NFT",
+  "codeowners": ["@b12e"],
+  "config_flow": true,
+  "documentation": "https://github.com/b12e/ha-tomorrowland-nft",
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/b12e/ha-tomorrowland-nft/issues",
+  "requirements": [],
+  "single_config_entry": true,
+  "version": "0.1.0"
+}

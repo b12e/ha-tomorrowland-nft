@@ -1,0 +1,70 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Tomorrowland NFT",
+        "description": "Track the floor price of the Tomorrowland Solana NFT collections on Magic Eden.",
+        "data": {
+          "currency": "Currency",
+          "collections": "Collections",
+          "scan_interval": "Update interval"
+        },
+        "data_description": {
+          "currency": "Currency for the converted floor price. Any CoinGecko currency code works, e.g. eur, usd or btc.",
+          "collections": "Collections to create sensors for.",
+          "scan_interval": "Minutes between price updates."
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not reach CoinGecko. Try again later.",
+      "invalid_currency": "CoinGecko has no SOL price in this currency.",
+      "no_collections": "Select at least one collection."
+    },
+    "abort": {
+      "single_instance_allowed": "Tomorrowland NFT is already configured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Tomorrowland NFT options",
+        "data": {
+          "currency": "Currency",
+          "collections": "Collections",
+          "scan_interval": "Update interval"
+        },
+        "data_description": {
+          "currency": "Currency for the converted floor price. Any CoinGecko currency code works, e.g. eur, usd or btc.",
+          "collections": "Collections to create sensors for.",
+          "scan_interval": "Minutes between price updates."
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not reach CoinGecko. Try again later.",
+      "invalid_currency": "CoinGecko has no SOL price in this currency.",
+      "no_collections": "Select at least one collection."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "floor_price_sol": {
+        "name": "Floor price SOL",
+        "state_attributes": {
+          "listed_count": { "name": "Listed" },
+          "avg_price_24h": { "name": "Average price (24h)" },
+          "volume_7d": { "name": "Volume (7d)" }
+        }
+      },
+      "floor_price_currency": {
+        "name": "Floor price {currency}",
+        "state_attributes": {
+          "sol_price": { "name": "SOL price" },
+          "avg_price_24h": { "name": "Average price (24h)" },
+          "volume_7d": { "name": "Volume (7d)" }
+        }
+      }
+    }
+  }
+}
